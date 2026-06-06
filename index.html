@@ -33,6 +33,9 @@
     />
     <meta name="twitter:image" content="/og-image.png" />
 
+    <!-- Hero focal image: fetch immediately, in parallel with the JS -->
+    <link rel="preload" as="image" href="/mypic.webp" type="image/webp" fetchpriority="high" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

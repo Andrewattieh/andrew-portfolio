@@ -11,7 +11,7 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28"
+      className="relative overflow-hidden pt-28 pb-16 md:pt-40 md:pb-28"
     >
       {/* Ambient glow background */}
       <div
@@ -22,7 +22,7 @@ export function Hero() {
         <div className="absolute right-0 top-40 h-72 w-72 rounded-full bg-accent/5 blur-[120px]" />
       </div>
 
-      <div className="container-page grid items-center gap-12 lg:grid-cols-[1.3fr_1fr] lg:gap-x-20">
+      <div className="container-page grid items-center gap-8 sm:gap-12 lg:grid-cols-[1.3fr_1fr] lg:gap-x-20">
         <div className="animate-fade-up">
           <p className="mb-4 font-mono text-sm font-medium uppercase tracking-widest text-accent">
             Hello, I'm

@@ -132,7 +132,7 @@ export function AIFace3D() {
 
   return (
     <div
-      className="relative mx-auto flex aspect-square w-full max-w-sm items-center justify-center"
+      className="relative mx-auto flex aspect-square w-full max-w-[17rem] items-center justify-center sm:max-w-sm"
       style={{ perspective: "1100px" }}
       onMouseMove={onMove}
       onMouseLeave={onLeave}
@@ -210,14 +210,22 @@ export function AIFace3D() {
           <div className="relative aspect-square">
             {/* Soft glow so the face reads sharply on the dark background */}
             <div className="pointer-events-none absolute inset-6 rounded-full bg-accent/15 blur-3xl" />
-            {/* Black background drops out via screen blend, leaving only the mesh */}
+            {/* Black background drops out via screen blend; the radial mask fades
+                the image edges so no rectangular box shows on non-pure-black bg. */}
             <img
               src="/mypic.webp"
               alt=""
               width={480}
               height={600}
+              fetchPriority="high"
               decoding="async"
               className="relative h-full w-full object-contain mix-blend-screen drop-shadow-[0_0_24px_rgba(34,211,238,0.25)]"
+              style={{
+                maskImage:
+                  "radial-gradient(ellipse 72% 82% at 50% 46%, #000 58%, transparent 92%)",
+                WebkitMaskImage:
+                  "radial-gradient(ellipse 72% 82% at 50% 46%, #000 58%, transparent 92%)",
+              }}
             />
           </div>
         </div>

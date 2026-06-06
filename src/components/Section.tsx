@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useInView } from "@/components/Reveal";
 
 /** Animated section wrapper: fades/slides its children in on scroll. */
 export function Section({
@@ -11,17 +11,19 @@ export function Section({
   className?: string;
   children: React.ReactNode;
 }) {
+  const { ref, inView } = useInView<HTMLElement>();
   return (
-    <motion.section
+    <section
+      ref={ref}
       id={id}
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className={cn("scroll-mt-20 py-20 md:py-28", className)}
+      className={cn(
+        "reveal scroll-mt-20 py-20 md:py-28",
+        inView && "reveal-in",
+        className
+      )}
     >
       {children}
-    </motion.section>
+    </section>
   );
 }
 

@@ -1,7 +1,7 @@
-import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Section, SectionHeading } from "@/components/Section";
+import { Reveal } from "@/components/Reveal";
 import { services } from "@/data/portfolio";
 
 const scrollToId = (id: string) =>
@@ -19,12 +19,9 @@ export function Services() {
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((service, i) => (
-            <motion.article
+            <Reveal
               key={service.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, delay: i * 0.08, ease: "easeOut" }}
+              delay={i * 80}
               className="group rounded-2xl border border-border bg-card p-6 transition-all hover:-translate-y-1 hover:border-accent/50"
             >
               <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-surface text-accent transition-colors group-hover:border-accent/50">
@@ -36,7 +33,7 @@ export function Services() {
               <p className="mt-2 text-sm leading-relaxed text-muted">
                 {service.description}
               </p>
-            </motion.article>
+            </Reveal>
           ))}
         </div>
 

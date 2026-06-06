@@ -1,6 +1,6 @@
-import { motion } from "framer-motion";
 import { Check, ExternalLink, Github } from "lucide-react";
 import { Section, SectionHeading } from "@/components/Section";
+import { Reveal } from "@/components/Reveal";
 import { Pill } from "@/components/ui/pill";
 import { projects } from "@/data/portfolio";
 
@@ -16,12 +16,9 @@ export function Projects() {
 
         <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, i) => (
-            <motion.article
+            <Reveal
               key={project.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, delay: i * 0.08, ease: "easeOut" }}
+              delay={i * 80}
               className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all hover:-translate-y-1 hover:border-accent/50"
             >
               {/* Cover image — PLACEHOLDER art in public/projects/ */}
@@ -101,7 +98,7 @@ export function Projects() {
                   </div>
                 )}
               </div>
-            </motion.article>
+            </Reveal>
           ))}
         </div>
       </div>

@@ -1,54 +1,33 @@
-import { Suspense, lazy } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
+import { Services } from "@/components/Services";
+import { Experience } from "@/components/Experience";
+import { Skills } from "@/components/Skills";
+import { Projects } from "@/components/Projects";
+import { Education } from "@/components/Education";
+import { Contact } from "@/components/Contact";
+import { Footer } from "@/components/Footer";
 
 /*
- * Only the navbar + hero are in the initial bundle. Everything below the fold
- * is code-split and streamed in, keeping first paint light. Each lazy section
- * reserves vertical space via a min-height fallback to avoid layout shift.
+ * Sections are imported eagerly: without framer-motion they're tiny, so loading
+ * them up front renders the whole page immediately (no blank scroll pop-in).
+ * The only heavy dependency, framer-motion, now lives solely in the desktop
+ * face (AIFace3D), which is still lazy-loaded — so phones never download it.
  */
-const Services = lazy(() =>
-  import("@/components/Services").then((m) => ({ default: m.Services }))
-);
-const Experience = lazy(() =>
-  import("@/components/Experience").then((m) => ({ default: m.Experience }))
-);
-const Skills = lazy(() =>
-  import("@/components/Skills").then((m) => ({ default: m.Skills }))
-);
-const Projects = lazy(() =>
-  import("@/components/Projects").then((m) => ({ default: m.Projects }))
-);
-const Education = lazy(() =>
-  import("@/components/Education").then((m) => ({ default: m.Education }))
-);
-const Contact = lazy(() =>
-  import("@/components/Contact").then((m) => ({ default: m.Contact }))
-);
-const Footer = lazy(() =>
-  import("@/components/Footer").then((m) => ({ default: m.Footer }))
-);
-
-const SectionFallback = () => <div className="min-h-[60vh]" aria-hidden="true" />;
-
 export default function App() {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       <main>
         <Hero />
-        <Suspense fallback={<SectionFallback />}>
-          <Services />
-          <Experience />
-          <Skills />
-          <Projects />
-          <Education />
-          <Contact />
-        </Suspense>
+        <Services />
+        <Experience />
+        <Skills />
+        <Projects />
+        <Education />
+        <Contact />
       </main>
-      <Suspense fallback={null}>
-        <Footer />
-      </Suspense>
+      <Footer />
     </div>
   );
 }

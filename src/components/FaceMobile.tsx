@@ -12,7 +12,6 @@ const faceSkills = [
   "AI & RAG Systems",
   "SQL · PostgreSQL",
   "Docker · Git",
-  "Beirut, Lebanon",
 ];
 
 const faceMask =

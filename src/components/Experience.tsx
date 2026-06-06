@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
 import { Section, SectionHeading } from "@/components/Section";
+import { Reveal } from "@/components/Reveal";
 import { Pill } from "@/components/ui/pill";
 import { experience } from "@/data/portfolio";
 
@@ -15,12 +15,9 @@ export function Experience() {
 
         <div className="mt-12 space-y-0">
           {experience.map((item, i) => (
-            <motion.div
+            <Reveal
               key={`${item.company}-${item.period}`}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, delay: i * 0.05, ease: "easeOut" }}
+              delay={i * 50}
               className="relative grid gap-2 border-l border-border pb-10 pl-8 last:pb-0 md:grid-cols-[1fr_2fr] md:gap-8"
             >
               {/* Timeline dot */}
@@ -56,7 +53,7 @@ export function Experience() {
                   ))}
                 </ul>
               </div>
-            </motion.div>
+            </Reveal>
           ))}
         </div>
       </div>

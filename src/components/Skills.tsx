@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
 import { Section, SectionHeading } from "@/components/Section";
+import { Reveal } from "@/components/Reveal";
 import { Pill } from "@/components/ui/pill";
 import { skillGroups } from "@/data/portfolio";
 
@@ -15,12 +15,9 @@ export function Skills() {
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {skillGroups.map((group, i) => (
-            <motion.div
+            <Reveal
               key={group.category}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, delay: i * 0.06, ease: "easeOut" }}
+              delay={i * 60}
               className="rounded-2xl border border-border bg-card p-6"
             >
               <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-foreground">
@@ -31,7 +28,7 @@ export function Skills() {
                   <Pill key={skill}>{skill}</Pill>
                 ))}
               </div>
-            </motion.div>
+            </Reveal>
           ))}
         </div>
       </div>

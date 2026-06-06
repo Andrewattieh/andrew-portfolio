@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#101014"/>
+      <stop offset="1" stop-color="#0a0a0c"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#g2)"/>
+  <circle cx="120" cy="360" r="160" fill="#22d3ee" opacity="0.08"/>
+  <text x="60" y="220" font-family="JetBrains Mono, monospace" font-size="22" fill="#22d3ee">React Native · Supabase</text>
+  <text x="60" y="270" font-family="Inter, sans-serif" font-size="40" font-weight="800" fill="#e7e7ee">Services Marketplace</text>
+</svg>

@@ -1,10 +1,12 @@
 import { Suspense, lazy, useEffect, useRef, useState } from "react";
+import { FaceMobile } from "./FaceMobile";
 
 /*
- * Defers the heavy interactive face scene out of the initial bundle.
- * - React.lazy code-splits AIFace3D into its own chunk (kept off first paint).
- * - It only mounts once the container scrolls near the viewport.
- * - A lightweight, same-size placeholder holds the space (no layout shift).
+ * Chooses the right hero visual per device:
+ * - Phones (<768px): the lightweight FaceMobile (face + skill pills, no
+ *   animation library) — keeps first paint fast since framer-motion never loads.
+ * - Desktop: the full interactive AIFace3D, code-split via React.lazy and
+ *   mounted once it scrolls near the viewport, with a same-size placeholder.
  */
 
 const AIFace3D = lazy(() =>
@@ -23,11 +25,29 @@ function FacePlaceholder() {
   );
 }
 
+const MOBILE_QUERY = "(max-width: 767px)";
+
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== "undefined" ? window.matchMedia(MOBILE_QUERY).matches : false
+  );
+  useEffect(() => {
+    const mq = window.matchMedia(MOBILE_QUERY);
+    const onChange = () => setIsMobile(mq.matches);
+    onChange();
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+  return isMobile;
+}
+
 export function FaceVisual() {
+  const isMobile = useIsMobile();
   const ref = useRef<HTMLDivElement>(null);
   const [show, setShow] = useState(false);
 
   useEffect(() => {
+    if (isMobile) return; // mobile renders the light version eagerly
     const el = ref.current;
     if (!el) return;
     const observer = new IntersectionObserver(
@@ -41,7 +61,9 @@ export function FaceVisual() {
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [isMobile]);
+
+  if (isMobile) return <FaceMobile />;
 
   return (
     <div ref={ref}>

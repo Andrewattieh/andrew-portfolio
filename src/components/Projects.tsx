@@ -30,6 +30,9 @@ export function Projects() {
                   src={project.image}
                   alt={`${project.title} cover`}
                   loading="lazy"
+                  decoding="async"
+                  width={800}
+                  height={450}
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>

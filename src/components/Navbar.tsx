@@ -80,7 +80,7 @@ export function Navbar() {
         {/* Mobile toggle */}
         <button
           type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-foreground md:hidden"
+          className="-mr-2 inline-flex h-11 w-11 items-center justify-center rounded-lg text-foreground md:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
@@ -106,7 +106,7 @@ export function Navbar() {
                   href={link.href}
                   onClick={() => setOpen(false)}
                   className={cn(
-                    "block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+                    "block rounded-lg px-3 py-3 text-sm font-medium transition-colors",
                     isActive
                       ? "bg-white/5 text-accent"
                       : "text-muted hover:text-foreground"
@@ -121,7 +121,7 @@ export function Navbar() {
           <li className="pt-2">
             <Button
               className="w-full"
-              size="sm"
+              size="md"
               onClick={() => {
                 setOpen(false);
                 scrollToId("contact");

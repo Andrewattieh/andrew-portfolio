@@ -256,11 +256,3 @@ export const education: EducationItem[] = [
     period: "2006 – 2021",
   },
 ];
-
-export type Language = { name: string; level: string };
-
-export const languages: Language[] = [
-  { name: "Arabic", level: "Native" },
-  { name: "English", level: "C1, Fluent" },
-  { name: "French", level: "A2, Beginner" },
-];

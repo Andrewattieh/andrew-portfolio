@@ -147,10 +147,10 @@ export function AIFace3D() {
         className="relative h-full w-full"
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
       >
-        {/* Connector lines (SVG, 400x400 space) */}
+        {/* Connector lines (SVG, 400x400 space) — hidden on phones (too long) */}
         <svg
           viewBox="0 0 400 400"
-          className="pointer-events-none absolute inset-0 h-full w-full overflow-visible"
+          className="pointer-events-none absolute inset-0 hidden h-full w-full overflow-visible md:block"
           style={{ transform: "translateZ(20px)" }}
           aria-hidden="true"
         >
@@ -201,9 +201,10 @@ export function AIFace3D() {
           ))}
         </svg>
 
-        {/* Center face — clean wireframe, no frame */}
+        {/* Center face — clean wireframe, no frame. Larger on phones where the
+            connector labels are hidden, smaller on md+ to leave room for them. */}
         <div
-          className="absolute left-1/2 top-1/2 w-[58%]"
+          className="absolute left-1/2 top-1/2 w-[78%] md:w-[58%]"
           style={{ transform: "translate(-50%, -50%) translateZ(40px)" }}
         >
           <div className="relative aspect-square">
@@ -211,17 +212,22 @@ export function AIFace3D() {
             <div className="pointer-events-none absolute inset-6 rounded-full bg-accent/15 blur-3xl" />
             {/* Black background drops out via screen blend, leaving only the mesh */}
             <img
-              src="/mypic.png"
+              src="/mypic.webp"
               alt=""
+              width={480}
+              height={600}
+              decoding="async"
               className="relative h-full w-full object-contain mix-blend-screen drop-shadow-[0_0_24px_rgba(34,211,238,0.25)]"
             />
           </div>
         </div>
 
-        {/* Floating labels at line endpoints */}
-        {NODES.map((n) => (
-          <Label key={n.id} node={n} />
-        ))}
+        {/* Floating labels at line endpoints — hidden on phones */}
+        <div className="hidden md:block">
+          {NODES.map((n) => (
+            <Label key={n.id} node={n} />
+          ))}
+        </div>
       </motion.div>
     </div>
   );

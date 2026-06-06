@@ -15,4 +15,23 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        // Split big, stable dependencies into their own cacheable chunks.
+        // framer-motion is isolated so it stays OFF the critical path (only the
+        // lazy below-fold sections + face scene pull it in). React (incl. the
+        // jsx-runtime + scheduler it needs) is grouped together so the entry's
+        // jsx import doesn't accidentally drag the motion chunk into first paint.
+        manualChunks(id) {
+          if (!id.includes("node_modules")) return;
+          if (id.includes("framer-motion")) return "motion";
+          if (
+            /[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/.test(id)
+          )
+            return "react";
+        },
+      },
+    },
+  },
 });

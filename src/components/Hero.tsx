@@ -1,8 +1,7 @@
-import { motion } from "framer-motion";
 import { ArrowRight, FileText, Github, Linkedin, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { TypingRole } from "@/components/TypingRole";
-import { AIFace3D } from "@/components/AIFace3D";
+import { FaceVisual } from "@/components/FaceVisual";
 import { profile, social } from "@/data/portfolio";
 
 const scrollToId = (id: string) =>
@@ -24,15 +23,11 @@ export function Hero() {
       </div>
 
       <div className="container-page grid items-center gap-12 lg:grid-cols-[1.3fr_1fr] lg:gap-x-20">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
+        <div className="animate-fade-up">
           <p className="mb-4 font-mono text-sm font-medium uppercase tracking-widest text-accent">
             Hello, I'm
           </p>
-          <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-foreground sm:text-5xl md:text-6xl">
+          <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
             {profile.name}
           </h1>
 
@@ -82,17 +77,12 @@ export function Hero() {
               Resume
             </a>
           </div>
-        </motion.div>
+        </div>
 
-        {/* Interactive 3D AI-face scene (in place of a profile photo) */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
-          className="w-full lg:pl-6 xl:pl-10"
-        >
-          <AIFace3D />
-        </motion.div>
+        {/* Interactive 3D AI-face scene (lazy-loaded, mounts on scroll-in) */}
+        <div className="order-last w-full animate-fade-up [animation-delay:150ms] lg:pl-6 xl:pl-10">
+          <FaceVisual />
+        </div>
       </div>
     </section>
   );
@@ -113,7 +103,7 @@ function IconLink({
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted transition-colors hover:border-accent hover:text-accent"
+      className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border text-muted transition-colors hover:border-accent hover:text-accent"
     >
       {children}
     </a>
